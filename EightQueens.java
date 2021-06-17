@@ -30,7 +30,14 @@ public class EightQueens implements Cloneable{
     //sets specified number of queens in allowed positions of 
     //the board. May have queens on it already
     public boolean setQueens(int queensRemaining){
-        
+        if(queensRemaining == 0){
+            return true;
+        }
+        for(int i=0; i<queensRemaining; i++){
+            for(int j=0; j<8; j++){
+                
+            }
+        }
 
         return false;
     }
