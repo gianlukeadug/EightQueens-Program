@@ -25,19 +25,37 @@ public class EightQueens implements Cloneable{
     //marks the square as o
     public void emptySquare(int row, int column){
         chessBoard[row][column] = 'o';
+        
     }
 
     //sets specified number of queens in allowed positions of 
     //the board. May have queens on it already
     public boolean setQueens(int queensRemaining){
-        if(queensRemaining == 0){
+        int row = 8 - queensRemaining;
+        int column = 0;
+        if(queensRemaining <= 0){
+            removeThreatPattern(row, column);
             return true;
         }
-        for(int i=0; i<queensRemaining; i++){
-            for(int j=0; j<8; j++){
-                
-            }
+        
+        while(column < 8){
+            if(chessBoard[row][column] == 'o'){
+                setQueen(row, column);
+                    if(setQueens(queensRemaining-1)){
+                        removeThreatPattern(row, column);
+                        return true;
+                    }
+                    
+                    emptySquare(row, column);
+                    removeThreatPattern(row, column);
+                    
+                }
+                column++;
         }
+        
+        
+            
+        
 
         return false;
     }
@@ -46,17 +64,37 @@ public class EightQueens implements Cloneable{
     private void markThreatPattern(int row, int column){
         for(int i=0; i<8; i++){
             for(int j=0; j<8; j++){
-                if(i == row && chessBoard[i][j] != 'Q'){
-                    markThreatSpace(i, j);
+                if(i == row && chessBoard[i][j] == 'o'){
+                    markThreatSpace(row, i, j);
                 }
-                if(j == column && chessBoard[i][j] != 'Q'){
-                    markThreatSpace(i, j);
+                if(j == column && chessBoard[i][j] == 'o'){
+                    markThreatSpace(row, i, j);
                 }
-                if(i-j == row-column && chessBoard[i][j] != 'Q'){
-                    markThreatSpace(i, j);
+                if(i-j == row-column && chessBoard[i][j] == 'o'){
+                    markThreatSpace(row, i, j);
                 }
-                if(i+j == row+column && chessBoard[i][j] != 'Q'){
-                    markThreatSpace(i, j);
+                if(i+j == row+column && chessBoard[i][j] == 'o'){
+                    markThreatSpace(row, i, j);
+                }
+                
+            }
+        }
+    }
+
+    private void removeThreatPattern(int row, int column){
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(i == row && chessBoard[i][j] == (char)('a'+row)){
+                    emptySquare(i, j);
+                }
+                if(j == column && chessBoard[i][j] == (char)('a'+row)){
+                    emptySquare(i, j);
+                }
+                if(i-j == row-column && chessBoard[i][j] == (char)('a'+row)){
+                    emptySquare(i, j);
+                }
+                if(i+j == row+column && chessBoard[i][j] == (char)('a'+row)){
+                    emptySquare(i, j);
                 }
                 
             }
@@ -81,20 +119,26 @@ public class EightQueens implements Cloneable{
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     //marks threat spaces
-    private void markThreatSpace(int row, int column){
-        chessBoard[row][column] = 'x';
+    private void markThreatSpace(int queenRow, int row, int column){
+        for(int i=0; i<8; i++){
+            if(i == queenRow){
+                chessBoard[row][column] = (char)('a' + i);
+            }
+        }
     }
 
     //main function 
     public static void main(String[] args) throws CloneNotSupportedException {
         EightQueens test = new EightQueens();
-        test.setQueen(2, 0);
+        System.out.println(test.setQueens(7));
+        
         System.out.println("Test : ");
         test.printBoard();
-        
+               
         
 
         
