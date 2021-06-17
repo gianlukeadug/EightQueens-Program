@@ -23,7 +23,7 @@ public class EightQueens{
 
     //marks the square as o
     public void emptySquare(int row, int column){
-
+        chessBoard[row][column] = 'Q';
     }
 
     //sets specified number of queens in allowed positions of 
@@ -34,6 +34,7 @@ public class EightQueens{
         return false;
     }
 
+    //prints the board to terminal
     public void printBoard(){
         for(int i=0; i<8; i++){
             for(int j=0; j<8; j++){
@@ -46,6 +47,7 @@ public class EightQueens{
     //main function 
     public static void main(String[] args) {
         EightQueens test = new EightQueens();
+        test.emptySquare(1, 1);
         test.printBoard();
     }
  
