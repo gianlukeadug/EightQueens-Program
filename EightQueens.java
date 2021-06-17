@@ -19,6 +19,7 @@ public class EightQueens implements Cloneable{
     //sets the queen on (row, column)
     public void setQueen(int row, int column){
         chessBoard[row][column] = 'Q';
+        markThreatPattern(row, column);
     }
 
     //marks the square as o
@@ -36,7 +37,23 @@ public class EightQueens implements Cloneable{
 
     //sets the queen's threat pattern with x's
     private void markThreatPattern(int row, int column){
-        
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(i == row && chessBoard[i][j] != 'Q'){
+                    markThreatSpace(i, j);
+                }
+                if(j == column && chessBoard[i][j] != 'Q'){
+                    markThreatSpace(i, j);
+                }
+                if(i-j == row-column && chessBoard[i][j] != 'Q'){
+                    markThreatSpace(i, j);
+                }
+                if(i+j == row+column && chessBoard[i][j] != 'Q'){
+                    markThreatSpace(i, j);
+                }
+                
+            }
+        }
     }
 
     //clone method
@@ -59,15 +76,18 @@ public class EightQueens implements Cloneable{
         }
     }
 
+    //marks threat spaces
+    private void markThreatSpace(int row, int column){
+        chessBoard[row][column] = 'x';
+    }
+
     //main function 
     public static void main(String[] args) throws CloneNotSupportedException {
         EightQueens test = new EightQueens();
-        EightQueens copy = (EightQueens)test.clone();
-        test.setQueen(1, 1);
+        test.setQueen(2, 0);
         System.out.println("Test : ");
         test.printBoard();
-        System.out.println("Copy : ");
-        copy.printBoard();
+        
         
 
         
