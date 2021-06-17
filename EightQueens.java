@@ -34,6 +34,11 @@ public class EightQueens implements Cloneable{
         return false;
     }
 
+    //sets the queen's threat pattern with x's
+    private void markThreatPattern(int row, int column){
+        
+    }
+
     //clone method
     public Object clone() throws CloneNotSupportedException{
         EightQueens clone = (EightQueens) super.clone();
