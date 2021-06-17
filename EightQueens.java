@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class EightQueens{
+public class EightQueens implements Cloneable{
     private char[][] chessBoard; 
 
     //initialize the entire board to empty state
@@ -34,6 +34,16 @@ public class EightQueens{
         return false;
     }
 
+    //clone method
+    public Object clone() throws CloneNotSupportedException{
+        EightQueens clone = (EightQueens) super.clone();
+        clone.chessBoard = new char[8][8];
+        for(int i=0; i<8; i++){
+            clone.chessBoard[i] =  chessBoard[i].clone();
+        }
+        return clone;
+    }
+
     //prints the board to terminal
     public void printBoard(){
         for(int i=0; i<8; i++){
@@ -45,12 +55,17 @@ public class EightQueens{
     }
 
     //main function 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
         EightQueens test = new EightQueens();
+        EightQueens copy = (EightQueens)test.clone();
         test.setQueen(1, 1);
+        System.out.println("Test : ");
         test.printBoard();
-        test.emptySquare(1, 1);
-        test.printBoard();
+        System.out.println("Copy : ");
+        copy.printBoard();
+        
+
+        
     }
  
 }
