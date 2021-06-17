@@ -18,12 +18,12 @@ public class EightQueens{
 
     //sets the queen on (row, column)
     public void setQueen(int row, int column){
-
+        chessBoard[row][column] = 'Q';
     }
 
     //marks the square as o
     public void emptySquare(int row, int column){
-        chessBoard[row][column] = 'Q';
+        chessBoard[row][column] = 'o';
     }
 
     //sets specified number of queens in allowed positions of 
@@ -47,6 +47,8 @@ public class EightQueens{
     //main function 
     public static void main(String[] args) {
         EightQueens test = new EightQueens();
+        test.setQueen(1, 1);
+        test.printBoard();
         test.emptySquare(1, 1);
         test.printBoard();
     }
